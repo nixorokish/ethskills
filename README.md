@@ -26,7 +26,8 @@ Install the https://github.com/austintgriffith/ethskills/blob/master/SKILL.md sk
 Install directly from GitHub — no clone required:
 
 ```bash
-claude plugin install https://github.com/austintgriffith/ethskills
+/plugin marketplace add austintgriffith/ethskills
+/plugin install ethskills
 ```
 
 ## Terminology
