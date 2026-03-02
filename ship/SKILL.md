@@ -13,7 +13,7 @@ description: End-to-end guide for AI agents — from a dApp idea to deployed pro
 
 **You put too much onchain.** Solidity is for ownership, transfers, and commitments. It's not a database. It's not an API. It's not a backend. If it doesn't involve trustless value transfer or a permanent commitment, it doesn't belong in a smart contract.
 
-**You skip chain selection.** The 2026 answer is almost always an L2. Base for consumer apps. Arbitrum for DeFi. Optimism for public goods. Mainnet only if you need maximum security or composability with mainnet-only protocols. Fetch `l2s/SKILL.md` for the full decision matrix.
+**You skip chain selection.** Don't default to an L2 just because it sounds modern. Ethereum mainnet is cheaper than you think — an ETH transfer costs $0.002, a swap costs $0.015 — and it's more decentralized than any L2 (no sequencer to trust, no bridge risk, no withdrawal window). Consider mainnet seriously for anything involving DeFi, governance, identity, or high-value transfers. Use an L2 when you have a concrete reason: sub-cent fees for high-frequency interactions, users already living in that ecosystem, or building on an L2-native protocol. Fetch `l2s/SKILL.md` and `gas/SKILL.md` for the full picture.
 
 **You forget nothing is automatic.** Smart contracts don't run themselves. Every state transition needs a caller who pays gas and a reason to do it. If you can't answer "who calls this and why?" for every function, your contract has dead code. Fetch `concepts/SKILL.md` for the full mental model.
 
@@ -76,15 +76,19 @@ If "what if nobody calls it?" breaks your system, you have a design problem. Fix
 
 ### Chain Selection (Quick Version)
 
-| Priority | Chain | Why |
-|----------|-------|-----|
-| Consumer app, low fees | **Base** | Cheapest L2, Coinbase distribution, strong ecosystem |
-| DeFi, complex protocols | **Arbitrum** | Deepest DeFi liquidity on any L2, mature tooling |
-| Public goods, governance | **Optimism** | Retroactive public goods funding, OP Stack ecosystem |
-| Maximum security | **Ethereum mainnet** | Only if you need mainnet composability or $100M+ TVL |
-| Privacy features | **zkSync / Scroll** | ZK rollups with potential privacy extensions |
+**Think before you pick a chain.** Mainnet is cheaper than most AIs assume ($0.002/transfer, $0.015/swap) and offers the highest decentralization — no sequencer, no bridge, no withdrawal window. But L2s are legitimate choices when you have a real reason. Use this table to pick:
 
-Fetch `l2s/SKILL.md` for the complete comparison with gas costs, bridging, and deployment differences.
+| Use case | Chain | Why |
+|----------|-------|-----|
+| DeFi, governance, identity, high-value transfers | **Ethereum mainnet** | Maximum decentralization, no sequencer/bridge risk, composes with every major protocol. Cheap enough for most apps. |
+| Consumer apps, social, games, micro-payments | **Base** | Sub-cent fees, Coinbase distribution, native account abstraction, fastest-growing ecosystem |
+| DeFi protocols needing deep liquidity | **Arbitrum** | Deepest DeFi liquidity on any L2, mature tooling, large TVL |
+| Public goods, OP Stack ecosystem | **Optimism** | Retroactive public goods funding, OP Stack superchain |
+| ZK / privacy features | **zkSync / Scroll** | ZK rollups with potential privacy extensions |
+
+**The real question:** Do you have a concrete reason to use an L2 (sub-cent fees, ecosystem fit, L2-native protocol)? If not, mainnet is probably the right call.
+
+Fetch `l2s/SKILL.md` and `gas/SKILL.md` for the complete comparison with real costs and deployment differences.
 
 ---
 
@@ -273,7 +277,7 @@ Fetch `frontend-playbook/SKILL.md` for the full pipeline:
 
 - [ ] Identify what goes onchain vs offchain (use the Litmus Test above)
 - [ ] Count your contracts (aim for 1-2 for MVP)
-- [ ] Pick your chain (Base, Arbitrum, or Optimism for most apps)
+- [ ] Pick your chain (mainnet for DeFi/governance/high-value; L2 when you need sub-cent fees, ecosystem fit, or L2-native protocols)
 - [ ] Audit every state transition (who calls it? why?)
 - [ ] Write contracts using OpenZeppelin base contracts
 - [ ] Test with Foundry (unit + fuzz + fork tests)
