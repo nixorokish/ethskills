@@ -47,7 +47,7 @@ If forkcast shows it's CFI → being considered but not confirmed.
 If it's not in forkcast or shows no fork relationship → not currently planned.
 
 **Step 2: Find the EIP (if you need the spec)**
-Search [eips.ethereum.org](https://eips.ethereum.org) or the EIPs repo. Check the status field:
+Search the [EIPs repo](https://github.com/ethereum/EIPs/tree/master/EIPS). Check the status field:
 - `Stagnant` = no activity for 6+ months, probably dead or deprioritized
 - `Withdrawn` = author gave up
 - `Draft` or `Review` = exists but not scheduled for any fork
